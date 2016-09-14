@@ -1,28 +1,24 @@
+// Created by Brandon Watts.
+
 import java.util.Scanner;
 import java.util.Stack;
 
-/**
- * Created by Brandon Watts on 9/11/2016.
- */
-public class Assingment1 {
-    
+public class cmsc401Assignment1 {
+
+    /**Member Variables**/
     public static Stack<Integer> inputStack,outputStack;
     public static int[] stateArray;
     public static Scanner scanner;
     
     public static void main(String[] args)
     {
-
         scanner = new Scanner(System.in);
-        inputStack = new Stack<>();
-        outputStack = new Stack<>();
-        inputtoStack();
+        inputStack = new Stack<>(); //to read input
+        outputStack = new Stack<>(); //to push output
+        inputtoStack(); //turn given input into stack
         initializeStateArray(stateArray = new int[inputStack.size()]);
         calculate();
         printStack(outputStack);
-        
-        
-        
     }
 
     private static void printStack(Stack<Integer> outputStack) {
@@ -31,24 +27,20 @@ public class Assingment1 {
     }
 
     private static void calculate() {
-
-        while(inputStack.size()>0)
+        while(inputStack.size()>0) //while there are still input to read
         {
-            int target=-1;
-            int targetPosition=stateArray.length;
-            int positionAway = inputStack.pop();
-            for (int i = stateArray.length-1;i>=0;i--)
+            int target=-1; //what is the next element
+            int targetPosition=stateArray.length;//where is it at
+            int positionAway = inputStack.pop(); //how far is input away
+            for (int i = stateArray.length-1;i>=0;i--) //look for an input that is desired position away
             {
                 target+=stateArray[i];
                 targetPosition--;
                 if(target==positionAway)
-                {
                     break;
-                }
-
             }
-            outputStack.push(targetPosition+1);
-            stateArray[targetPosition]=0;
+            outputStack.push(targetPosition+1); //add that to output
+            stateArray[targetPosition]=0; //set that position to taken
         }
     }
 
@@ -60,7 +52,6 @@ public class Assingment1 {
     }
 
     private static void inputtoStack() {
-
         int inputTimes = Integer.parseInt(scanner.nextLine()); //how many lines?
 
         for (int i = 0; i < inputTimes; i++) {  //grab the lines and stick them in an stack
